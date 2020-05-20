@@ -3,19 +3,37 @@ import React from 'react';
 import './Movie.css';
 
 
-function Movie({title, poster}){
+function Movie({title, poster, genres, synopsis}){
     return(
-        <div>
-            <MoviePoster poster={poster}></MoviePoster>
-            <h1>{title}</h1>
-        </div>            
+        <div className="Movie">
+            <div className="Movie__Columns">
+                <MoviePoster poster={poster} alt={title}></MoviePoster>                
+            </div>            
+            <div className="Movie_Columns">
+                <h1>{title}</h1>
+                <div className="Movie__Genres">
+                    {genres.map((genre, index) => <MovieGenre genre={genre} key={index} />)}
+                </div>
+                <div className="Movie__Synopsis">
+                    {synopsis}
+                </div>
+            </div>
+        </div>        
     )
 }
 
-function MoviePoster({poster}){
+function MoviePoster({poster, alt}){
     return (
-        <img src={poster} width="300" alt="Movie Poster"></img>
+        <img src={poster} alt={alt} title={alt} className="Movie__Poster"></img>
     )
 }
+
+function MovieGenre({genre}){
+    return (
+        <span className="Movie__Genre">{genre}</span>
+    )
+}
+
+
 
 export default Movie;
