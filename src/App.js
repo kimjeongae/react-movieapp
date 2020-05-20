@@ -22,14 +22,30 @@ const movies = [
   }
 ]
 
-function App() {
-  return (
-    <div className="App">      
-      {movies.map( movie => {
-        return <Movie title={movie.title} poster={movie.poster}></Movie>
-      })}
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    greeting:'Hello!'
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({
+        greeting:'Hello Again!'
+      })
+    }, 2000);
+  }
+
+  render(){
+    return (
+      <div className="App">      
+        {this.state.greeting}
+        {movies.map( (movie, index) => {
+          return <Movie title={movie.title} poster={movie.poster} key={movie.index}></Movie>
+        })}
+      </div>
+    );
+  }  
 }
 
 export default App;
